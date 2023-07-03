@@ -1,10 +1,13 @@
 const roleModel = require("../models/roleModel");
 const AppError = require("../utils/AppError");
 const ResponseTemp = require("../utils/ResponseTemp");
+const GlobalService = require("./global.service");
 
 
 class RoleService {
  
+ globalServiceInstance = new GlobalService;
+
 async createNewRole(name){
     const alReadyExistOrNot = await roleModel.findOne({name})
     if(alReadyExistOrNot){
@@ -18,12 +21,14 @@ async createNewRole(name){
      }
 }
 
-async getAllRole(){
+async getAllRole(pageNumber){
     const defaultPageSize = 3; 
 
     const skip = (pageNumber - 1) * defaultPageSize;
 
     const data = await roleModel.find()
+    .limit(defaultPageSize)
+    .skip(skip);
    
     if(data.length){
         const meta = await this.globalServiceInstance.pagination(roleModel.find(),defaultPageSize,pageNumber)
