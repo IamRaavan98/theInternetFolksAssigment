@@ -12,7 +12,7 @@ class AuthController {
 
     if (await this.authserviceInstance.checkdetailsOfSignup(email, password, name )) {
       //creating new User
-      let response = await this.authserviceInstance.createNewUser(data);
+      let response = await this.authserviceInstance.createNewUser({ email, password, name });
 
       //  generate token
       const resp = await this.authserviceInstance.createToken(
@@ -41,7 +41,7 @@ class AuthController {
    
     const { email,password } = req.body;
 
-    if (email || password) {
+    if (!email || !password) {
       throw new AppError(false, "please provide email and password", 404);
     }
 
