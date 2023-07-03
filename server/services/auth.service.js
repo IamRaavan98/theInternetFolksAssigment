@@ -7,12 +7,9 @@ const bcrypt = require("bcrypt");
 class AuthService {
   userServiceInstance = new UserService();
   // checking details of signup
-  async checkdetailsOfSignup(data) {
-    if (!data) {
+  async checkdetailsOfSignup( email, password, name ) {
+ 
    
-      throw new AppError(false, "please provide some data", true, 404);
-    }
-    const { email, password, name } = data;
 
     if (!email) {
       throw new AppError(false, "email not found", true, 404);

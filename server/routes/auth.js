@@ -17,7 +17,7 @@ const auth  = new AuthController;
 
 authRoutes.post("/signup",tryCatch(auth.signup),errorHandler)
 
-authRoutes.post("/login",tryCatch(auth.login),errorHandler)
+authRoutes.post("/signin",tryCatch(auth.signin),errorHandler)
 
 authRoutes.get("/me",  auths,tryCatch(auth.me),errorHandler)
 

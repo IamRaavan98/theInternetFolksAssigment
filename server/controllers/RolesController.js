@@ -4,11 +4,11 @@ const AppError = require("../utils/AppError");
 class RolesController {
   roleServiceInstance = new RoleService();
   createRole = async (req, res) => {
-    const {data} = req.body;
+    const {name} = req.body;
         
-    if (!data || !(data?.name)) throw new AppError(false, "name not found please provide name", 404);
+    if (!name) throw new AppError(false, "name not found please provide name", 404);
     else {
-      const resp = await this.roleServiceInstance.createNewRole(data?.name);
+      const resp = await this.roleServiceInstance.createNewRole(name);
 
       return res.status(resp?.errorCode).json(resp);
     }

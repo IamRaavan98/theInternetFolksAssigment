@@ -8,9 +8,9 @@ class AuthController {
   userserviveInstance = new UserService();
 
   signup = async (req, res) => {
-    const { data } = req.body;
+    const { email, password, name } = req.body;
 
-    if (await this.authserviceInstance.checkdetailsOfSignup(data)) {
+    if (await this.authserviceInstance.checkdetailsOfSignup(email, password, name )) {
       //creating new User
       let response = await this.authserviceInstance.createNewUser(data);
 
@@ -37,16 +37,16 @@ class AuthController {
     }
   };
 
-  login = async (req, res) => {
+  signin = async (req, res) => {
    
-    const { data } = req.body;
+    const { email,password } = req.body;
 
-    if (!data || !data?.email || !data?.password) {
+    if (email || password) {
       throw new AppError(false, "please provide email and password", 404);
     }
 
     //creating new User
-    let response = await this.authserviceInstance.login(data);
+    let response = await this.authserviceInstance.login({email,password});
 
     //  generate token
     const resp = await this.authserviceInstance.createToken(response?.content);

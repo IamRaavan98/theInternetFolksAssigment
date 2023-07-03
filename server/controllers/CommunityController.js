@@ -11,14 +11,14 @@ class CommunityController {
   roleServiceInstance = new RoleService();
 
   createCommunity = async (req, res) => {
-    const { data } = req.body;
+    const { name } = req.body;
 
-    if (!data || !data?.name) {
+    if (!name) {
       throw new AppError(false, "community name not found", 404);
     } else {
       const newCommunity =
         await this.communityServiceInstance.createCommunityService(
-          data?.name,
+          name,
           req.user._id
         );
 
