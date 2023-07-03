@@ -1,7 +1,7 @@
 const RoleService = require("../services/role.service");
 const AppError = require("../utils/AppError");
 
-class RoleController {
+class RolesController {
   roleServiceInstance = new RoleService();
   createRole = async (req, res) => {
     const {data} = req.body;
@@ -22,4 +22,4 @@ class RoleController {
   }
 }
 
-module.exports = RoleController;
+module.exports = RolesController;

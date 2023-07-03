@@ -2,8 +2,7 @@ const express = require("express");
 const { tryCatch } = require("../utils/tryCatch");
 const errorHandler = require("../middleware/errorhandler");
 const { auths } = require("../middleware/auths");
-const RoleController = require("../controllers/roleController");
-
+const RolesController = require("../controllers/RolesController")
 
 const roleRoutes = express.Router();
 
@@ -13,7 +12,7 @@ roleRoutes.get("/welcome",function(req ,res){
 })
 
 
-const role  = new RoleController;
+const role  = new RolesController;
 
 roleRoutes.post("/",auths,tryCatch(role.createRole),errorHandler)
 roleRoutes.get("/",auths,tryCatch(role.getRole),errorHandler)
