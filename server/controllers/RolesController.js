@@ -15,8 +15,9 @@ class RolesController {
   };
 
   getRole = async (req, res)=>{
+    const pageNumber = req.query?.page || 1;
 
-    const data = await this.roleServiceInstance.getAllRole()
+    const data = await this.roleServiceInstance.getAllRole(pageNumber)
     
     return res.status(data?.errorCode).json(data)
   }

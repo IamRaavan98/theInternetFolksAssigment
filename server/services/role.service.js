@@ -19,9 +19,16 @@ async createNewRole(name){
 }
 
 async getAllRole(){
+    const defaultPageSize = 3; 
+
+    const skip = (pageNumber - 1) * defaultPageSize;
+
     const data = await roleModel.find()
-    if(data){
-     return new ResponseTemp(true,"successful",200,data)
+   
+    if(data.length){
+        const meta = await this.globalServiceInstance.pagination(roleModel.find(),defaultPageSize,pageNumber)
+         
+     return new ResponseTemp(true,"successful",200,data,meta)
     }
     else{
       throw new AppError(false,"unsuccessful",404)
