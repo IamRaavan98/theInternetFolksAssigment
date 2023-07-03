@@ -50,10 +50,10 @@ class CommunityController {
   };
 
   getAllMember = async (req, res) => {
-    
+  
     const {id} = req.params;
-     
-    if(!id){
+    if(!id || id.includes("id")){
+        
       throw new AppError(false,"please provide id",404)
    }
    else{
